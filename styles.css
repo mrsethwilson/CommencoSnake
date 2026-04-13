@@ -39,6 +39,8 @@ main {
   display: flex;
   align-items: end;
   justify-content: space-between;
+  justify-self: center;
+  width: min(100%, 560px);
   gap: 16px;
 }
 
@@ -127,6 +129,7 @@ p {
   position: absolute;
   inset: 13%;
   background: url("./assets/motorola-solutions-logo.png") center / contain no-repeat;
+  filter: brightness(0) invert(1);
 }
 
 .food {
@@ -202,11 +205,20 @@ p {
   grid-row: 2;
 }
 
-.instructions {
+.game-notes {
+  display: grid;
   justify-self: center;
   width: min(100%, 560px);
-  font-weight: 700;
+  gap: 6px;
   text-align: center;
+}
+
+.instructions {
+  font-weight: 700;
+}
+
+.direction-instructions {
+  font-size: 0.95rem;
 }
 
 button:hover {
@@ -232,15 +244,6 @@ button:active {
 @media (max-width: 640px) {
   body {
     padding: 16px;
-  }
-
-  .top-bar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .score-panel {
-    text-align: left;
   }
 
   .controls {
