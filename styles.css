@@ -127,9 +127,8 @@ p {
 .snake-head::before {
   content: "";
   position: absolute;
-  inset: 13%;
-  background: url("./assets/motorola-solutions-logo.png") center / contain no-repeat;
-  filter: brightness(0) invert(1);
+  inset: 8%;
+  background: url("./assets/motorola-solutions-logo-white.svg") center / contain no-repeat;
 }
 
 .food {
