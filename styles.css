@@ -1,0 +1,237 @@
+:root {
+  --commenco-navy: #0a2240;
+  --commenco-blue: #002f6d;
+  --commenco-bright-blue: #0047bb;
+  --commenco-lime: #94d600;
+  --surface: #ffffff;
+  --surface-soft: #f4f8ff;
+  --board-surface: #e8f1fb;
+  --board-grid: rgba(10, 34, 64, 0.1);
+
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--surface-soft);
+  color: var(--commenco-navy);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+main {
+  width: min(100%, 620px);
+}
+
+.game-shell {
+  display: grid;
+  gap: 18px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+p {
+  margin: 0;
+  color: var(--commenco-blue);
+}
+
+.score-panel {
+  min-width: 96px;
+  text-align: right;
+}
+
+.score-label {
+  display: block;
+  color: var(--commenco-blue);
+  font-size: 0.85rem;
+}
+
+.score-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.board {
+  --grid-size: 16;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  border: 2px solid var(--commenco-navy);
+  background: var(--board-surface);
+  outline: none;
+  overflow: hidden;
+}
+
+.board:focus-visible {
+  box-shadow: 0 0 0 4px var(--commenco-lime);
+}
+
+.cell {
+  aspect-ratio: 1;
+  border: 1px solid var(--board-grid);
+}
+
+.board.game-over .cell {
+  background: var(--commenco-blue);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.board.game-over::after {
+  content: "You Lose";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.snake-head,
+.snake-body {
+  background: var(--commenco-lime);
+}
+
+.snake-head {
+  box-shadow: inset 0 0 0 3px var(--commenco-navy);
+}
+
+.food {
+  position: relative;
+}
+
+.food::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  background: url("./assets/CommenCo_Icon-Blue.png") center / contain no-repeat;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button,
+.direction-button {
+  min-height: 44px;
+  border: 2px solid var(--commenco-navy);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--commenco-navy);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button {
+  padding: 0 18px;
+}
+
+.direction-pad {
+  display: none;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(2, 48px);
+  gap: 8px;
+}
+
+.direction-button {
+  padding: 0;
+}
+
+.direction-button[data-direction="up"] {
+  grid-column: 2;
+}
+
+.direction-button[data-direction="left"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.direction-button[data-direction="down"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.direction-button[data-direction="right"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+button:hover {
+  background: #eaf8bd;
+}
+
+button:disabled {
+  border-color: var(--commenco-blue);
+  color: var(--commenco-blue);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--commenco-lime);
+  outline-offset: 2px;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 16px;
+  }
+
+  .top-bar,
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+
+  .score-panel {
+    text-align: left;
+  }
+
+  .direction-pad {
+    display: grid;
+  }
+
+  .board.game-over::after {
+    font-size: 2.75rem;
+  }
+}
